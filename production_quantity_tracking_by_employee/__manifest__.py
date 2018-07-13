@@ -10,7 +10,7 @@
     'summary': 'The module provides visibility to production efficiency by employee',
     'description': """
 
-The module provides visibility to production efficiency by employee 
+The module provides visibility to production efficiency by employee.
 Workorder Quantity by Employee Management application extends Odoo’s labor reporting functionality by providing the capability to capture manufacturing produced quantity data by Work Order by Employee. The app allows to link Employees to one or more Work Centers and set up a Kiosk mode screen on the Shop Floor for Data capture. PIN security can be enabled for Employees logging in. Once the Employees are logged in, the system displays only the Work Orders scheduled on the Work Centers linked to the Employee. Produced quantity is reported by choosing the Work Order Kanban card from the board and entering produced quantity on a touch-friendly number keypad. Captured Data can be reviewed through the Manufacturing Order or a dedicated report available in List View and a Pivot Table or Exported to Excel or CSV for further analysis.
 
 Functions:
