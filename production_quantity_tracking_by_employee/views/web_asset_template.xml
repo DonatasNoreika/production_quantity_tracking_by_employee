@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets" name="production_quantity_tracking_by_employee assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/production_quantity_tracking_by_employee/static/src/js/employee_kanban_view_handler.js"></script>
+            <script type="text/javascript" src="/production_quantity_tracking_by_employee/static/src/js/presence_widgets.js"></script>
+            <script type="text/javascript" src="/production_quantity_tracking_by_employee/static/src/js/kiosk_mode.js"></script>
+            <script type="text/javascript" src="/production_quantity_tracking_by_employee/static/src/js/my_attendances.js"></script>
+
+            <script type="text/javascript" src="/production_quantity_tracking_by_employee/static/src/js/kiosk_confirm_inherited.js"></script>
+            <script type="text/javascript" src="/production_quantity_tracking_by_employee/static/src/js/greeting_message_inherited.js"></script>
+            <script type="text/javascript" src="/production_quantity_tracking_by_employee/static/src/js/work_order_confirm.js"></script>
+            <script type="text/javascript" src="/production_quantity_tracking_by_employee/static/src/js/work_order_kanban_view_handler.js"></script>
+            <link rel="stylesheet" href="/hr_attendance/static/src/less/hr_attendance.less"/>
+        </xpath>
+    </template>
+</odoo>

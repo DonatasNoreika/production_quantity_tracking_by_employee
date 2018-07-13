@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- views -->
+    <record id="view_attendance_tree" model="ir.ui.view">
+        <field name="name">produced_qty.attendance.tree</field>
+        <field name="model">produced_qty.attendance</field>
+        <field name="arch" type="xml">
+            <tree string="Employee attendances">
+                <field name="employee_id"/>
+                <field name="check_in"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_attendance_view_form" model="ir.ui.view">
+        <field name="name">produced_qty.attendance.form</field>
+        <field name="model">produced_qty.attendance</field>
+        <field name="arch" type="xml">
+            <form string="Employee attendances">
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="check_in"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="produced_qty_attendance_action_kiosk_mode" model="ir.actions.client">
+        <field name="name">Attendances</field>
+        <field name="tag">produced_qty_attendance_kiosk_mode</field>
+        <field name="target">fullscreen</field>
+    </record>
+
+    <record id="qty_attendance_action_greeting_message" model="ir.actions.client">
+        <field name="name">Message</field>
+        <field name="tag">hr_attendance_greeting_message</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_mrp_produced_qty_manager"
+        name="Produced Quatities Manager"
+        parent="mrp.menu_mrp_root"
+        sequence="10"/>
+
+    <menuitem id="menu_produced_qty_attendance_kiosk_mode" name="Kiosk Mode" parent="production_quantity_tracking_by_employee.menu_mrp_produced_qty_manager" sequence="15" action="produced_qty_attendance_action_kiosk_mode"/>
+
+    <menuitem id="menu_produced_qty_attendance_view_employees_kanban" name="Employees" parent="production_quantity_tracking_by_employee.menu_mrp_produced_qty_manager" sequence="30" action="hr.open_view_employee_list_my"/>
+
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--produced quantity form view-->
+        <record model="ir.ui.view" id="bg_produced_qty_form_view">
+            <field name="name">bg.produced_quantity.form</field>
+            <field name="model">bg.produced_quantity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="employee_id"/>
+                            <field name="employee_wc_id"/>
+                            <field name="production_id"/>
+                            <field name="work_order_id"/>
+                            <field name="produced_qty"/>
+                            <field name="qty_confirmed"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--produced quantity tree view-->
+        <record model="ir.ui.view" id="bg_produced_qty_tree_view">
+            <field name="name">bg.produced_quantity.tree</field>
+            <field name="model">bg.produced_quantity</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_date"/>
+                    <field name="employee_id"/>
+                    <field name="employee_wc_id"/>
+                    <field name="production_id"/>
+                    <field name="work_order_id"/>
+                    <field name="work_order_rel" invisible="1"/>
+                    <field name="produced_qty"/>
+                    <field name="qty_confirmed"/>
+                    <field name="rel_department_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Produced employees quantities action view-->
+        <record model="ir.actions.act_window" id="produced_qty_action">
+            <field name="name">Produced Quantities</field>
+            <field name="res_model">bg.produced_quantity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first produced quantity record
+                </p>
+            </field>
+        </record>
+
+        <!--Produced employees quantities menu-->
+        <menuitem id="menu_produced_qty"
+                  name="Produced Quantities"
+                  parent="production_quantity_tracking_by_employee.menu_mrp_produced_qty_manager"
+                  action="produced_qty_action"
+                  groups="mrp.group_mrp_user,mrp.group_mrp_manager"
+                  sequence="20"/>
+
+
+    </data>
+</odoo>

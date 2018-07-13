@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--inherited work center form view-->
+        <record model="ir.ui.view" id="mrp_workorder_inherited_form_view">
+            <field name="name">mrp.mrp_workorder.form.inherit</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp.mrp_production_workcenter_form_view_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group" position="after">
+                    <div class="oe_right oe_button_box" style="margin-top: 10px">
+                        <button name="sum_produced_qty" type="object" string="Recalculate Produced Quantity" icon="fa-exchange"/>
+                    </div>
+                    <field name="produced_qty_ids">
+                        <tree>
+                            <field name="employee_id"/>
+                            <field name="produced_qty"/>
+                            <field name="qty_confirmed"/>
+                            <button name="confirm_qty" type="object" string="Confirm Quantity" icon="fa fa-check"
+                                    attrs="{'invisible': [('qty_confirmed', '==', True)]}"/>
+                            <button name="unconfirm_qty" type="object" string="Unconfirm Quantity" icon="fa fa-close"
+                                    attrs="{'invisible': [('qty_confirmed', '==', False)]}"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="qty_confirmed" invisible="1"/>
+                                <field name="employee_id"/>
+                                <field name="produced_qty"/>
+                                <field name="qty_left"/>
+                                <field name="qty_confirmed"/>
+                            </group>
+                        </form>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+        <!--inherited work order tree view-->
+        <record model="ir.ui.view" id="mrp_workorder_inherited_tree_view">
+            <field name="name">mrp.mrp_workorder.tree.inherit</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp.mrp_production_workcenter_tree_view_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='production_id']" position="attributes">
+                    <attribute name="widget">many2one_clickable</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="workcenter_line_kanban_inherited">
+            <field name="name">mrp.production.work.order.kanban.inherited</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp.workcenter_line_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//t[@t-name='kanban-box']" position="replace">
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <field name="qty_diff" invisible='1'/>
+                            <field name="qty_produced" invisible='1'/>
+                            <field name="state" invisible='1'/>
+                            <field name="work_center_match" invisible='1'/>
+                            <div class="oe_kanban_details">
+                                <div id="textbox">
+                                    <div class="col-xs-11" style="padding:0px">
+                                        <strong>
+                                            <field name="name"/>
+                                            <br/>
+                                            <field name="product_id"/>
+                                            <br/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li>Made:
+                                        <t t-esc="(record.qty_produced.raw_value * 1)"/>
+                                        of
+                                        <t t-esc="(record.qty_production.raw_value * 1)"/>
+                                        <t t-esc="record.product_uom_id.value"/>
+                                    </li>
+                                    <li>Left:
+                                        <t t-esc="(record.qty_diff.raw_value * 1)"/>
+                                    </li>
+                                    <li>
+                                        <t class='oe_kanban_global_click' t-esc="record.production_id.value"/>
+                                    </li>
+                                    <li> State:
+                                        <t t-esc="record.state.value"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="o_work_order_kanban_in_kiosk">
+            <field name="name">mrp.production.work.order.kanban</field>
+            <field name="model">mrp.workorder</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column_kiosk" create="0">
+                    <field name="name"/>
+                    <field name="production_id"/>
+                    <field name="state"/>
+                    <field name="workcenter_id"/>
+                    <field name="product_id"/>
+                    <field name="qty_production"/>
+                    <field name="product_uom_id"/>
+                    <field name="qty_produced"/>
+                    <field name="qty_diff"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <div id="textbox">
+                                        <div class="col-xs-11" style="padding:0px">
+                                            <strong>
+                                                <field name="name"/><br/>
+                                                <field name="product_id"/><br/>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <field name="work_center_match" invisible="1"/>
+                                        <li>Made: <t t-esc="(record.qty_produced.raw_value * 1)"/> of <t t-esc="(record.qty_production.raw_value * 1)"/> <t t-esc="record.product_uom_id.value"/></li>
+                                        <li>Left: <t t-esc="(record.qty_diff.raw_value * 1)"/></li>
+                                        <li><t t-esc="record.production_id.value"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="o_work_order_action_in_kiosk" model="ir.actions.act_window">
+            <field name="name">Work Orders</field>
+            <field name="res_model">mrp.workorder</field>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="o_work_order_kanban_in_kiosk"/>
+            <field name="context">{'search_default_ready': True, 'search_default_progress': True}</field>
+            <field name="domain">[('work_center_match', '=', True)]</field>
+            <field name="help" type="html">
+                <p>
+                    Create a few employees to be able to select an employee here and perform his check in / check out.
+                </p>
+                <p>
+                    To create employees go to the Employees menu.
+                </p>
+            </field>
+        </record>
+
+
+        <record id="work_orders_dashboard_action" model="ir.actions.act_window">
+            <field name="name">Work Orders Dashboard</field>
+            <field name="res_model">mrp.workorder</field>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="workcenter_line_kanban_inherited"/>
+            <field name="target">fullscreen</field>
+            <field name="context">{'search_default_ready': True, 'search_default_progress': True}</field>
+        </record>
+
+
+        <!--WO dashboard menu-->
+        <menuitem id="work_orders_dashboard_menu"
+                  name="Work Orders Dashboard"
+                  parent="production_quantity_tracking_by_employee.menu_mrp_produced_qty_manager"
+                  action="work_orders_dashboard_action"
+                  groups="mrp.group_mrp_user,mrp.group_mrp_manager"
+                  sequence="25"/>
+
+    </data>
+</odoo>

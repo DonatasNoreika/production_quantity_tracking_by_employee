@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+produced_quantity_manager,produced quantity manager,model_bg_produced_quantity,mrp.group_mrp_manager,1,1,1,1
+qty_attendance_manager,quantity attendance manager,model_produced_qty_attendance,mrp.group_mrp_manager,1,1,1,1
+produced_quantity_manager,produced quantity manager,model_bg_produced_quantity,mrp.group_mrp_user,1,1,1,1
+qty_attendance_manager,quantity attendance manager,model_produced_qty_attendance,mrp.group_mrp_user,1,1,1,1
