@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Production Quantity Tracking by Employee',
+    'name': 'Full Production Quantity Tracking by Employee',
     'version': '1.0',
     'author': "Vidas Lisauskas, Romualdas Laurinavičius, Pardavimai lengvai LT, Donatas Noreika",
-    'images': ['static/images/main_screenshot.png'],
+    'images': ['static/kiosk_2.gif'],
     'support': 'vidas@pardavimai.com',
     'website': "",
     'summary': 'The module provides visibility to production efficiency by employee',
