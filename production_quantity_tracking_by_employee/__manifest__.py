@@ -3,7 +3,7 @@
 {
     'name': 'Full Production Quantity Tracking by Employee',
     'version': '1.0',
-    'author': "Vidas Lisauskas, Romualdas Laurinavičius, Pardavimai lengvai LT, Donatas Noreika",
+    'author': "Vidas Lisauskas, Romualdas Laurinavičius, Donatas Noreika",
     'images': ['static/main_screenshot2.png'],
     'support': 'vidas@pardavimai.com',
     'website': "",
