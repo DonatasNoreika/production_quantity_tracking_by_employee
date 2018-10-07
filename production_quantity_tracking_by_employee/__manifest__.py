@@ -30,7 +30,7 @@ Functions:
 Icon made by "Vectors Market" (https://www.flaticon.com/authors/vectors-market) from "Flaticon" (https://www.flaticon.com/) is licensed by "Creative Commons BY 3.0" (http://creativecommons.org/licenses/by/3.0/)
     """,
 
-    'price': 78.00,
+    'price': 178.00,
     'currency': 'EUR',
     'license': 'OPL-1',
 
